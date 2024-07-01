@@ -4,26 +4,25 @@ const taskProgressList = document.getElementById("taskProgressList");
 const taskDoneList = document.getElementById("taskDoneList");
 const taskBlockedList = document.getElementById("taskBlockedList");
 const addTaskBtn = document.getElementById("addTaskBtn");
-const taskinput = document.getElementById("task-input");
-const 1status = document.getElementById("status");
+const saveBtn = document.getElementById("save-btn");
+const taskInput = document.getElementById("task-input");
+const taskStatus = document.getElementById("status");
+const trashbtn = document.getElementById("trashbtn");
+const pencilbtn = document.getElementById("pencilbtn");
 
 // VARIABLES FOR TASK
 const tasks = [
-  {
-    name: "Task One",
-    status: "TODO",
-  },
-  {
-    name: "Task Two",
-    status: "INPROGRESS",
-  },
-  {
-    name: "Task Three",
-    status: "BLOCKED",
-  },
+  // {
+  //   name: "Task Two",
+  //   status: "INPROGRESS",
+  // },
+  // {
+  //   name: "Task Three",
+  //   status: "BLOCKED",
+  // },
 ];
 
-function draw() {
+function zurah() {
   taskTodoList.innerHTML = "";
   taskProgressList.innerHTML = "";
   taskDoneList.innerHTML = "";
@@ -35,10 +34,11 @@ function draw() {
     <div class="d-flex justify-content-between align-items-center border border-1 rounded p-2">
     <span>${tasks[i].name}</span>
     <div>
-        <button class="btn">
+        <button class="btn" id="pencilbtn"data-bs-toggle="modal"
+          data-bs-target="#taskModal">
         <i class="bi bi-pencil"></i>
         </button>
-        <button class="btn">
+        <button class="btn" id="trashbtn">
         <i class="bi bi-trash"></i>
         </button>
     </div>
@@ -69,19 +69,28 @@ function draw() {
   }
 }
 
-addTaskBtn.addEventListener("click", function () {
-  tasks[1].status = "DONE";
-  draw();
+saveBtn.addEventListener("click", function () {
+  const newTask = {
+    name: taskInput.value,
+    status: taskStatus.value,
+  };
+  tasks.push(newTask);
+  zurah();
   console.log("TASKS", tasks);
 });
 
-draw();
-const tasknemeh = document.getElementById("save-btn");
-tasknemeh.addEventListener("click", () => {
-  const newtask = {
-    name: taskinput.value,
-    status: status.value ,
-  };
-  tasks.push(newtask);
-  //   draw();
+zurah();
+trashbtn.addEventListener("click", () => {
+  tasks.slice(1);
+  // Таск кардуудыг дахин үзүүлэх
+  zurah();
 });
+// const trashButtons = document.querySelectorAll("trashbtn");
+// trashbtn.forEach((button, index) => {
+// button.addEventListener("click", () => {
+// Таскыг массиваас устгах
+// tasks.splice(index, 1);
+// Таск кардуудыг дахин үзүүлэх
+// zurah();
+// });
+// });
