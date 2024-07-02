@@ -1,3 +1,8 @@
+function myFunction() {
+  let element = document.body;
+  element.dataset.bsTheme =
+    element.dataset.bsTheme == "light" ? "dark" : "light";
+}
 // DOM ELEMEMTS
 const taskTodoList = document.getElementById("taskTodoList");
 const taskProgressList = document.getElementById("taskProgressList");
@@ -101,6 +106,6 @@ saveBtn.addEventListener("click", function () {
 
 zurah();
 const deletetask = (taskindex) => {
-  tasks.splice(taskindex);
+  tasks.splice(taskindex, 1);
   zurah();
 };
