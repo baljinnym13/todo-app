@@ -31,20 +31,23 @@ function zurah() {
   for (let i = 0; i < tasks.length; i++) {
     console.log("TASKS", tasks);
     const newTaskCard = `
-    <div class="d-flex justify-content-between align-items-center border border-1 rounded p-2">
+    <div class="d-flex justify-content-between align-items-center border border-1 rounded p-2 ${getStatusColor(
+      tasks[i].status
+    )} ">
     <span>${tasks[i].name}</span>
     <div>
         <button class="btn" id="pencilbtn"data-bs-toggle="modal"
           data-bs-target="#taskModal">
         <i class="bi bi-pencil"></i>
         </button>
-        <button class="btn" id="trashbtn">
+        <button class="btn" id="trashbtn" onclick="deletetask(${i})">
         <i class="bi bi-trash"></i>
         </button>
     </div>
     </div>
  `;
 
+    console.log("status", getStatusColor(tasks[i].status));
     switch (tasks[i].status) {
       case "TODO": {
         taskTodoList.innerHTML += newTaskCard;
@@ -68,6 +71,23 @@ function zurah() {
     }
   }
 }
+// task[i].status
+function getStatusColor(status) {
+  switch (status) {
+    case "TODO": {
+      return "border-light";
+    }
+    case "INPROGRESS": {
+      return "border-warning";
+    }
+    case "DONE": {
+      return "border-success";
+    }
+    case "BLOCKED": {
+      return "border-danger";
+    }
+  }
+}
 
 saveBtn.addEventListener("click", function () {
   const newTask = {
@@ -80,17 +100,7 @@ saveBtn.addEventListener("click", function () {
 });
 
 zurah();
-trashbtn.addEventListener("click", () => {
-  tasks.slice(1);
-  // Таск кардуудыг дахин үзүүлэх
+const deletetask = (taskindex) => {
+  tasks.splice(taskindex);
   zurah();
-});
-// const trashButtons = document.querySelectorAll("trashbtn");
-// trashbtn.forEach((button, index) => {
-// button.addEventListener("click", () => {
-// Таскыг массиваас устгах
-// tasks.splice(index, 1);
-// Таск кардуудыг дахин үзүүлэх
-// zurah();
-// });
-// });
+};
