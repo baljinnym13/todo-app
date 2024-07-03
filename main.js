@@ -16,6 +16,8 @@ const trashbtn = document.getElementById("trashbtn");
 const pencilbtn = document.getElementById("pencilbtn");
 const modechange = document.getElementById("modechange");
 let taskChangeIndex = -1;
+let todocon = document.getElementById("todocon");
+const cardTodo = document.querySelector(".card-todo");
 
 // VARIABLES FOR TASK
 const tasks = [
@@ -34,6 +36,7 @@ function zurah() {
   taskProgressList.innerHTML = "";
   taskDoneList.innerHTML = "";
   taskBlockedList.innerHTML = "";
+  let todoCount = 0;
 
   for (let i = 0; i < tasks.length; i++) {
     console.log("TASKS", tasks);
@@ -58,10 +61,16 @@ function zurah() {
     switch (tasks[i].status) {
       case "TODO": {
         taskTodoList.innerHTML += newTaskCard;
+        console.log("taskTodoList", taskTodoList.length);
+        todoCount += 1;
+        // counting += 1;
+        console.log("todoCount", tasks.len);
+
         break;
       }
       case "INPROGRESS": {
         taskProgressList.innerHTML += newTaskCard;
+        // taskProgressList.length = todocon
         break;
       }
       case "DONE": {
@@ -77,7 +86,11 @@ function zurah() {
       }
     }
   }
+  console.log(taskTodoList.children);
+  console.log(taskTodoList.childNodes);
+  todocon.textContent = taskTodoList.children.length;
 }
+
 // task[i].status
 function getStatusColor(status) {
   switch (status) {
@@ -106,7 +119,7 @@ saveBtn.addEventListener("click", function () {
   console.log("TASKS", tasks);
 });
 
-zurah();
+// zurah();
 const deletetask = (taskindex) => {
   tasks.splice(taskindex, 1);
   zurah();
