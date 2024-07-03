@@ -14,6 +14,8 @@ const taskInput = document.getElementById("task-input");
 const taskStatus = document.getElementById("status");
 const trashbtn = document.getElementById("trashbtn");
 const pencilbtn = document.getElementById("pencilbtn");
+const modechange = document.getElementById("modechange");
+let taskChangeIndex = -1;
 
 // VARIABLES FOR TASK
 const tasks = [
@@ -41,7 +43,7 @@ function zurah() {
     )} ">
     <span>${tasks[i].name}</span>
     <div>
-        <button class="btn" id="pencilbtn"data-bs-toggle="modal"
+        <button class="btn" onclick="modeChange(${i})" id="pencilbtn"data-bs-toggle="modal"
           data-bs-target="#taskModal">
         <i class="bi bi-pencil"></i>
         </button>
@@ -109,3 +111,16 @@ const deletetask = (taskindex) => {
   tasks.splice(taskindex, 1);
   zurah();
 };
+function modeChange(changeIndex) {
+  taskInput.value = tasks[changeIndex].name;
+  taskStatus.value = tasks[changeIndex].status;
+  taskChangeIndex = changeIndex;
+}
+
+modechange.addEventListener("click", () => {
+  tasks[taskChangeIndex].name = taskInput.value;
+  tasks[taskChangeIndex].status = taskStatus.value;
+  taskInput.value = "";
+  taskStatus.value = "TODO";
+  zurah();
+});
