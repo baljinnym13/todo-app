@@ -17,8 +17,9 @@ const pencilbtn = document.getElementById("pencilbtn");
 const modechange = document.getElementById("modechange");
 let taskChangeIndex = -1;
 let todocon = document.getElementById("todocon");
-const cardTodo = document.querySelector(".card-todo");
-
+const progresscon = document.getElementById("progresscon");
+const donecon = document.getElementById("donecon");
+const blockcon = document.getElementById("blockcon");
 // VARIABLES FOR TASK
 const tasks = [
   // {
@@ -44,14 +45,15 @@ function zurah() {
     <div class="d-flex justify-content-between align-items-center border border-1 rounded p-2 ${getStatusColor(
       tasks[i].status
     )} ">
+    <i class="bi bi-check2-circle"></i>
     <span>${tasks[i].name}</span>
     <div>
         <button class="btn" onclick="modeChange(${i})" id="pencilbtn"data-bs-toggle="modal"
           data-bs-target="#taskModal">
-        <i class="bi bi-pencil"></i>
+        <i class="bi bi-pencil-fill"></i>
         </button>
-        <button class="btn" id="trashbtn" onclick="deletetask(${i})">
-        <i class="bi bi-trash"></i>
+        <button class="btn" id="trashbtn" onclick="deletetask(${i}) ">
+        <i class="bi bi-trash text-danger"></i>
         </button>
     </div>
     </div>
@@ -89,6 +91,9 @@ function zurah() {
   console.log(taskTodoList.children);
   console.log(taskTodoList.childNodes);
   todocon.textContent = taskTodoList.children.length;
+  progresscon.textContent = taskProgressList.children.length;
+  donecon.textContent = taskDoneList.children.length;
+  blockcon.textContent = taskBlockedList.children.length;
 }
 
 // task[i].status
